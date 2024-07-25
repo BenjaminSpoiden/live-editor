@@ -1,8 +1,12 @@
+import { CollaborativeApp } from "@/components/CollaborativeApp";
+import { Room } from "@/components/Room"
 
 const Page = () => {
   return (
-    <div>test</div>
-  )
+    <Room>
+      <CollaborativeApp />
+    </Room>
+  );
 }
 
 export default Page
