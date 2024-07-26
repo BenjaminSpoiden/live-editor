@@ -19,3 +19,17 @@ type CreateDocumentParams = {
 type AccessType = ["room:write"] | ["room:read", "room:presence:write"]
 
 type RoomAccesses = Record<string, AccessType>;
+
+interface CommentHighlightOptions {
+  HTMLAttributes: Record<string, any>;
+}
+
+interface CommentHighlightStorage {
+  showComposer: boolean;
+  currentHighlightId: string | null;
+  activeHighlightId: string | null;
+}
+
+interface CustomStorage {
+  commentHighlight: CommentHighlightStorage;
+}

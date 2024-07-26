@@ -1,10 +1,17 @@
-import { CollaborativeApp } from "@/components/CollaborativeRoom";
-import { Editor } from "@/components/Editor";
-import { Providers } from "@/components/Providers"
+'use client'
+import { Editor } from "@/components/Editor/Editor";
+import { LiveMap } from "@liveblocks/core";
+import { RoomProvider } from "@liveblocks/react/suspense";
 
 const Page = () => {
   return (
-    <div>test</div>
+    <RoomProvider 
+      id="room-id"
+      initialPresence={{ cursor: null }}
+      initialStorage={{ notes: new LiveMap() }}
+    >
+      <Editor />
+    </RoomProvider>
   );
 }
 
