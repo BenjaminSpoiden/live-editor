@@ -1,11 +1,10 @@
-import { CollaborativeApp } from "@/components/CollaborativeApp";
-import { Room } from "@/components/Room"
+import { CollaborativeApp } from "@/components/CollaborativeRoom";
+import { Editor } from "@/components/Editor";
+import { Providers } from "@/components/Providers"
 
 const Page = () => {
   return (
-    <Room>
-      <CollaborativeApp />
-    </Room>
+    <div>test</div>
   );
 }
 

@@ -67,3 +67,64 @@
     @apply bg-background text-foreground;
   }
 }
+
+.wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.editor {
+  flex-grow: 1;
+}
+
+[data-lexical-editor] {
+  padding: 2px 12px;
+  outline: none;
+}
+
+[data-lexical-editor] p {
+  margin: 0.8em 0;
+}
+
+.toolbar {
+  padding: 12px;
+  border-bottom: 1px solid #E6E6E7;
+}
+
+.threads {
+  width: 350px;
+  border-left: 1px solid #E6E6E7;
+}
+
+.thread {
+  border-bottom: 1px solid #E6E6E7;
+}
+
+.thread .lb-thread-composer:after {
+  content: none;
+}
+
+.placeholder {
+  position: absolute;
+  left: 12px;
+  top: 16px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.floating-composer {
+  width: 350px;
+}
+
+.add-comment {
+  all: unset;
+  font-weight: 500;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.add-comment:hover {
+  background: #F4F4F5;
+}
