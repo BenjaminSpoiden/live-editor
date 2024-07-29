@@ -2,6 +2,7 @@
 import { nanoid } from "@liveblocks/core"
 import { liveblocks } from "../liveblocks";
 import { revalidatePath } from "next/cache";
+import { buildDocuments } from "@/utils/buildDocuments";
 
 export const onCreateDocumentAction = async ({ userId, email }: CreateDocumentParams) => {
 
@@ -27,4 +28,33 @@ export const onCreateDocumentAction = async ({ userId, email }: CreateDocumentPa
     } catch (error) {
         console.error('Error creating document: ', error)
     }
+}
+
+export const getDocument = async ({documentId}: { documentId: string }) => {
+    try {
+        const room = await liveblocks.getRoom(documentId)
+        if (!room) {
+            return {
+              error: {
+                code: 404,
+                message: "Document not found",
+                suggestion: "Check that you're on the correct page",
+              },
+            };
+        }
+
+        const document: LiveblocksDocument = buildDocuments(room);
+
+        return { data: document }
+    } catch (error) {
+        console.error('Problem getting Room: ', error)
+        return {
+            error: {
+              code: 500,
+              message: "Error fetching document",
+              suggestion: "Refresh the page and try again",
+            },
+        };
+    }
+    
 }
