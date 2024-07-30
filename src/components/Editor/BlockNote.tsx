@@ -49,7 +49,7 @@ export const BlockNote: React.FC<BlockNoteProps> = ({ doc, provider }) => {
       //   console.log('FILE UPLOAD', file)
       //   return "https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf";
       // }
-    });
+    } as any);
     return (
       <div className={styles.container}>
         <div className={styles.editorHeader}>

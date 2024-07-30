@@ -29,14 +29,14 @@ export const onGetMentionMenuItems = (editor: BlockNoteEditor, users: readonly U
         id: user.id,
         onItemClick: () => {
             editor.insertInlineContent([
-                {
-                    type: 'mention',
-                    props: {
-                        user
-                    }
+              {
+                type: "mention",
+                props: {
+                  user,
                 },
-                " "
-            ])
+              },
+              " ",
+            ] as any); 
         },
         icon: <p>{user.info?.username?.substring(0, 1)}</p>
     }))
