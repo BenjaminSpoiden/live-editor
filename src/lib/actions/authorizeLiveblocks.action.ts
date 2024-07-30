@@ -9,29 +9,49 @@ export const onAuthorizeLiveblocksAction = async () => {
 
     const clerkUser = await currentUser()
     
+    if(!clerkUser) redirect('/sign-in');
+    
+    const { id, firstName, lastName, emailAddresses, imageUrl, username } = clerkUser
+    // const anonymousUser = {
+    //   id: "anonymous",
+    //   info: {
+    //     id: "anonymous",
+    //     username: "Anonymous",
+    //     email: '',
+    //     color: "#ff0000",
+    //     avatar: ''
+    //   },
+    // };
 
-    const anonymousUser = {
-      id: "anonymous",
+    // const user = clerkUser ? {
+    //     id: clerkUser.id,
+    //     info: {
+    //         id: clerkUser.id,
+    //         username: clerkUser.username || `${clerkUser.firstName} ${clerkUser.lastName}`,
+    //         email: clerkUser.emailAddresses.at(0)?.emailAddress || '',
+    //         avatar: clerkUser.imageUrl,
+    //         color: getUserColor(clerkUser.id)
+    //     }
+    // } : anonymousUser
+
+    const user = {
+      id,
       info: {
-        id: "anonymous",
-        username: "Anonymous",
-        email: '',
-        color: "#ff0000",
-        avatar: ''
-      },
-    };
-    const user = clerkUser ? {
-        id: clerkUser.id,
-        info: {
-            id: clerkUser.id,
-            username: clerkUser.username || `${clerkUser.firstName} ${clerkUser.lastName}`,
-            email: clerkUser.emailAddresses.at(0)?.emailAddress || '',
-            avatar: clerkUser.imageUrl,
-            color: getUserColor(clerkUser.id)
-        }
-    } : anonymousUser
+        id,
+        name: `${firstName} ${lastName}`,
+        username: username || '',
+        email: emailAddresses[0].emailAddress,
+        avatar: imageUrl,
+        color: getUserColor(id) as string
+      }
+    }
 
-    const {status, body} =  await liveblocks.identifyUser({userId: user.id, groupIds: []}, {userInfo: user.info})
+    const {status, body} =  await liveblocks.identifyUser({
+      userId: user.id, 
+      groupIds: []
+    }, {
+      userInfo: user.info
+    })
 
     if(status !== 200) {
         return {

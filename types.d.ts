@@ -1,9 +1,12 @@
+type UserType = "creator" | "editor" | "viewer";
+
 type User = {
   id: string;
   name: string;
-  avatar?: string;
+  email: string;
+  avatar: string;
   color: string;
-  groupIds: string[];
+  userType?: UserType;
 };
 
 type Group = {
@@ -12,9 +15,9 @@ type Group = {
 };
 
 type CreateDocumentParams = {
-  userId: string,
-  email: string
-}
+  userId: string;
+  email: string;
+};
 
 type LiveblocksDocument = {
   id: string;
@@ -25,18 +28,18 @@ type LiveblocksDocument = {
   lastConnection: string;
   draft: boolean;
   type: DocumentType;
-}
+};
 
 type DocumentType = "text" | "whiteboard" | "spreadsheet";
 
 type DocumentGroup = Group & {
-  access: DocumentAccess
-}
+  access: DocumentAccess;
+};
 
 type DocumentUser = User & {
-  access: DocumentAccess
-  isCurrentUser: boolean 
-}
+  access: DocumentAccess;
+  isCurrentUser: boolean;
+};
 
 enum DocumentAccess {
   FULL = "full",
@@ -45,7 +48,12 @@ enum DocumentAccess {
   NONE = "none",
 }
 
-type AccessType = ["room:write"] | ["room:read", "room:presence:write"]
+type SearchParamProps = {
+  params: { [key: string]: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+type AccessType = ["room:write"] | ["room:read", "room:presence:write"];
 
 type RoomAccesses = Record<string, AccessType>;
 
@@ -55,8 +63,7 @@ type DocumentAccesses = {
   users: Record<DocumentUser["id"], DocumentAccess>;
 };
 
-interface DocumentRoomMetadata
-  extends Record<string, string | string[]> {
+interface DocumentRoomMetadata extends Record<string, string | string[]> {
   name: Document["name"];
   type: DocumentType;
   owner: User["id"];
@@ -83,3 +90,16 @@ interface CustomStorage {
   commentHighlight: CommentHighlightStorage;
 }
 
+
+type RoomMetadata = {
+  creatorId: string
+  email: string,
+  title: string
+}
+
+type CollaborativeRoomProps = {
+  roomId: string;
+  roomMetadata: RoomMetadata;
+  users: User[];
+  currentUserType: UserType;
+};

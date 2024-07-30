@@ -24,37 +24,44 @@ export const onCreateDocumentAction = async ({ userId, email }: CreateDocumentPa
         });
         revalidatePath('/')
 
-        return JSON.stringify(room)
+        return room
     } catch (error) {
         console.error('Error creating document: ', error)
     }
 }
 
-export const getDocument = async ({documentId}: { documentId: string }) => {
+export const onGetDocument = async ({roomId, userId}: { roomId: string, userId: string }) => {
     try {
-        const room = await liveblocks.getRoom(documentId)
-        if (!room) {
-            return {
-              error: {
-                code: 404,
-                message: "Document not found",
-                suggestion: "Check that you're on the correct page",
-              },
-            };
+        const room = await liveblocks.getRoom(roomId)
+        const hasAccess = Object.keys(room.usersAccesses).includes(userId)
+        if (!hasAccess) {
+          throw new Error("You do not have access to this document");
         }
 
-        const document: LiveblocksDocument = buildDocuments(room);
-
-        return { data: document }
+        return room
     } catch (error) {
         console.error('Problem getting Room: ', error)
-        return {
-            error: {
-              code: 500,
-              message: "Error fetching document",
-              suggestion: "Refresh the page and try again",
-            },
-        };
     }
-    
+}
+
+export const onGetDocuments = async (email: string) => {
+    try {
+        const rooms = await liveblocks.getRooms({ userId: email })
+        return rooms
+    } catch (error) {
+        console.error(`Error happened while getting rooms: ${error}`);
+    }
+} 
+
+export const onUpdateDocument = async (roomId: string, documentTitle: string) => {
+    try {
+        const room = await liveblocks.updateRoom(roomId, {
+            metadata: {
+                title: documentTitle
+            }
+        })
+        return room
+    } catch (error) {
+        console.error('Error happened while updating document: ', error)
+    }
 }
