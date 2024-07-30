@@ -66,7 +66,7 @@ export const CollaborativeRoom: React.FC<CollaborativeRoomProps> = ({
   }, [isEditing])
 
   return (
-    <RoomProvider id={roomId}>
+    <RoomProvider id={roomId} initialPresence={{ cursor: null }}>
       <ClientSideSuspense fallback={<Loader />}>
         <div className="collaborative-room">
           <Header>

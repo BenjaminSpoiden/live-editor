@@ -1,0 +1,42 @@
+.avatars {
+    display: flex;
+    padding: 0 0.75rem;
+}
+
+.avatar {
+    display: flex;
+    place-content: center;
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 100px;
+    margin-left: -0.75rem;
+}
+.avatar img {
+    border-radius: 100px;
+}
+.avatar:before {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 100%;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    padding: 5px 10px;
+    color: var(--color-surface-elevated);
+    font-size: 0.75rem;
+    border-radius: 8px;
+    margin-top: 10px;
+    z-index: 1;
+    background: var(--color-text);
+    white-space: nowrap;
+}
+
+.avatar:hover:before {
+    opacity: 1;
+}
+
+.avatar_picture {
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+}

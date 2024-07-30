@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
+import "@blocknote/core/fonts/inter.css";
+import "@blocknote/shadcn/style.css";
 import "./globals.css";
-import "@liveblocks/react-ui/styles.css";
-import "@liveblocks/react-lexical/styles.css";
+import "./normalize.css";
+import "./text-editor.css";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from '@clerk/nextjs'
 import { Providers } from "@/components/Providers";

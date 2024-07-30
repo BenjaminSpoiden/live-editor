@@ -2,7 +2,6 @@
 import { nanoid } from "@liveblocks/core"
 import { liveblocks } from "../liveblocks";
 import { revalidatePath } from "next/cache";
-import { buildDocuments } from "@/utils/buildDocuments";
 
 export const onCreateDocumentAction = async ({ userId, email }: CreateDocumentParams) => {
 
