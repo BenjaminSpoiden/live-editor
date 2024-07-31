@@ -1,9 +1,8 @@
 "use client"
-import { BlockNoteEditor, CustomBlockConfig, fileParse, InlineContentSchema, insertOrUpdateBlock } from "@blocknote/core";
-import { AddFileButton, createReactBlockSpec, DefaultFilePreview, FileAndCaptionWrapper, FileToExternalHTML, ReactCustomBlockRenderProps } from "@blocknote/react";
-import { useState } from "react";
+
+import { BlockNoteEditor, fileParse, insertOrUpdateBlock } from "@blocknote/core";
+import { AddFileButton, createReactBlockSpec, FileToExternalHTML} from "@blocknote/react";
 import { FaFilePdf } from "react-icons/fa";
-import {Document} from 'react-pdf'
 import { PDFRender } from "./PDFRender";
 export const onInsertPDFDocument = (editor: BlockNoteEditor) => ({
   title: "Insert a PDF Document",
